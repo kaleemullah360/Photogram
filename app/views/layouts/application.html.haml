@@ -1,0 +1,26 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %title Photogram
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  %body
+    %nav.navbar.navbar-default
+      .navabar-container
+        .navebar-header
+          %button.navbar-toggle.collapsed{"data-target"=>"#bs-navbar-collapse-1", "data-toggle"=>"collapse", type: "button"}
+            %span.sr-only Toggle Navigation
+            %span.icon-bar
+            %span.icon-bar
+          .navbar-brand=link_to "Photogram", root_path
+        .collapse.navbar-collapse#bs-navebar-collapse-1
+          %ul.nav.navbar-nav.navbar-right
+            %li.icon.edit_member_link{:rel => "tooltip", :title => "New"}
+              %a.pjax{:href => "#{new_post_path}"}
+                .btn.btn-default
+                  %i.glyphicon.glyphicon-plus-sign
+                  %span{:style => "display:none"} Edit
+                                                                                
+  = yield

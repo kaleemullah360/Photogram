@@ -1,0 +1,39 @@
+.panel-body
+  .panel.panel-default
+    %table.table.table-condensed.table-striped
+      %thead
+        %tr
+          %th.header ID
+          %th.header Title
+          %th.header Created At
+          %th.header Updated At
+          %th.header Picture
+          %th.last.shrink
+      %tbody
+        -@posts.each do |post|
+          %tr
+            %td=post.id
+            %td=post.caption
+            %td=post.created_at.strftime('%Y/%m/%d %H:%M:%S')
+            %td=post.updated_at.strftime('%Y/%m/%d %H:%M:%S')
+            %td.image_field.paperclip_type{:title => "#{post.caption}"}
+              =link_to (image_tag post.image.url(:thumb), class:'img-responsive'), post_path(post)
+            %td.last.links
+              %ul.inline.list-inline
+                %li.icon.show_member_link{:rel => "tooltip", :title => "show"}
+                  %a.pajax{:href => "#{post_path(post)}"}
+                    %i.glyphicon.glyphicon-picture
+                    %span{:style => "Display:none"} Show
+                %li.icon.edit_member_link{:rel => "tooltip", :title => "Edit"}
+                  %a.pjax{:href => "#{edit_post_path(post)}"}
+                    %i.glyphicon.glyphicon-edit
+                    %span{:style => "display:none"} Edit
+                %li.icon.delete_member_link{:rel => "tooltip", :title => "Delete"}
+                  %a.pjax{:href => "#{post_path(post)}", 'data-method': :delete, data:{confirm: "Are you sure want to delete this Image?"}}
+                    %i.glyphicon.glyphicon-trash
+                      %span{:style => "display:none"} Delete
+
+  .digg_pagination
+    .page_info
+      = page_entries_info @posts
+    = will_paginate @posts, :renderer => BootstrapPagination::Rails

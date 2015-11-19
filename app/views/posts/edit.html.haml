@@ -1,0 +1,7 @@
+.text-center
+  =image_tag @post.image.url(:medium)
+  =render 'form'
+  =link_to "Delete Post", post_path(@post), 'data-method': :delete, data:{confirm: "Are you sure want to delete this Image?"}
+  |
+  =link_to "Cancel" , posts_path
+

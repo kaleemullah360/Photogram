@@ -1,0 +1,13 @@
+.posts-wrapper.row
+  .post
+    .post-head
+      .name
+        Image Galary
+    .image.center-block
+      =image_tag @post.image.url(:medium)
+    %p.caption
+      =@post.caption
+    .text-center.edit-link
+      =link_to "Go Back", posts_path
+      |
+      =link_to "Edit Image", edit_post_path(@post)
